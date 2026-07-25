@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'pages/home_page.dart';
+import 'package:perplixity_recreation/pages/chat_page.dart';
 import 'theme/colours.dart';
 
 void main() {
@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.submitButton),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       ),
-      home: const Homepage(),
+      home: const ChatPage(
+        question: 'what is the score between india vs australia? ',
+      ),
     );
   }
 }

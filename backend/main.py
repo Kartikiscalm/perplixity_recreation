@@ -21,24 +21,25 @@ async def websocket_chat_endpoint(websocket: WebSocket):
     await websocket.accept()
 
     try:
+        #await asyncio.slee(0.1) the use of it is that the resopnses from gemini will keep appering, and we'll not store it somewhere and then ekdam se appear jo jaiga
         await asyncio.sleep(0.1)
         data = await websocket.receive_json()
-        print(data)
+       
         query = data.get("query")
-        print(query)
+        
 
         #serch the web and return the sources
         search_results = search_service.web_search(query)
-        print(search_results)
+        
         #sort the sources and get the most relivent ones
         sorted_results = sort_source_service.sort_sources(query, search_results)
-        print(sorted_results)
+        
         await asyncio.sleep(0.1)
         await websocket.send_json({
             "type":"search_result",
             "data": sorted_results
         })
-        print("yooooooo")
+        
         
         #gen the response using llm
         for chunk in llm_service.generate_response(query,sorted_results):
